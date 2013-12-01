@@ -60,6 +60,7 @@ class UsersController < ApplicationController
     end
 
     def delete_user
-      redirect_to(root_url) unless current_user.admin?
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless (current_user.admin? && !current_user?(@user))
     end
 end

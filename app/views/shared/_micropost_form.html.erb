@@ -1,7 +1,22 @@
+  <script>
+  function lengthFunction() {
+    var length = document.getElementById("micropost_content").value.length;
+    var string;
+
+    if (length > 140) {
+      string = length.toString().fontcolor("red") + " / 140".fontcolor("red");
+    } else {
+      string = length.toString().fontcolor("green") + " / 140".fontcolor("green");
+    }
+
+    document.getElementById("length_display").innerHTML = string;
+  }
+  </script>
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+  <div class="field" id="content">
+    <%= f.text_area :content, placeholder: "Compose new micropost...", onkeyup:"lengthFunction()" %>
   </div>
+  <div id="length_display"></div>
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
